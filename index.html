@@ -1,0 +1,379 @@
+
+<!--
+  index.html — Versión en un solo archivo que muestra los 5 documentos juntos.
+  Diseño: fondos blancos con acentos en rojo y amarillo, distribución como en las portadas.
+  (Usa las secciones tituladas 1..5 debajo para cada documento que subiste.)
+-->
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Portadas — Aesthetic Rojo & Amarillo</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700;900&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --red: #c40000;
+      --yellow: #ffcc00;
+      --text: #221b1b;
+      --card-bg: #ffffff;
+      --muted: #6b5a5a;
+      --glass: rgba(255,255,255,0.9);
+      --maxwidth: 980px;
+    }
+
+    /* Reset + base */
+    *{box-sizing: border-box;}
+    html,body{height:100%;margin:0;font-family: "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;color:var(--text);background:#f7f7f7;}
+    a{color:inherit}
+    .wrap{max-width:var(--maxwidth);margin:36px auto;padding:18px;}
+
+    /* Page header */
+    header.global {
+      display:flex;
+      align-items:center;
+      gap:18px;
+      margin-bottom:22px;
+    }
+    .brand {
+      width:88px;height:88px;border-radius:14px;
+      background:linear-gradient(180deg,var(--glass),rgba(255,255,255,0.98));
+      display:flex;align-items:center;justify-content:center;
+      font-family:"Playfair Display", serif;
+      font-weight:800;color:var(--red);
+      box-shadow: 0 8px 26px rgba(0,0,0,0.08);
+      border:1px solid rgba(0,0,0,0.04);
+      font-size:20px;
+    }
+    .page-title {line-height:1;}
+    .page-title .eyebrow {font-weight:800; text-transform:uppercase; letter-spacing:1px; color:var(--muted); font-size:12px;}
+    .page-title h1 {margin:6px 0 0 0; font-family:"Playfair Display", serif; font-size:30px; text-transform:uppercase; letter-spacing:2px;}
+    .page-title p {margin:6px 0 0 0; color:var(--muted); font-size:13px;}
+
+    /* Card (each document) */
+    .card {
+      background:var(--card-bg);
+      border-radius:16px;
+      padding:20px;
+      box-shadow: 0 10px 30px rgba(30,20,20,0.06);
+      margin-bottom:22px;
+      border:1px solid rgba(0,0,0,0.04);
+    }
+
+    /* Top block: match info */
+    .match-top {
+      display:flex;
+      gap:18px;
+      align-items:flex-start;
+      justify-content:space-between;
+      flex-wrap:wrap;
+      margin-bottom:14px;
+    }
+    .match-left {
+      display:flex;
+      gap:14px;
+      align-items:center;
+    }
+    .match-meta {
+      background: linear-gradient(180deg, rgba(255,255,255,0.85), rgba(250,250,250,0.85));
+      padding:12px 14px;
+      border-radius:12px;
+      border:1px solid rgba(0,0,0,0.03);
+      display:flex;
+      gap:12px;
+      align-items:center;
+    }
+    .country-block {font-family:"Playfair Display", serif; font-weight:700; font-size:20px; text-transform:uppercase; letter-spacing:1px;}
+    .team-stats {font-size:13px; color:var(--muted); line-height:1.3; max-width:620px;}
+
+    .score {
+      min-width:108px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding:10px 14px;
+      border-radius:12px;
+      font-weight:900;
+      font-size:22px;
+      color:var(--red);
+      background: linear-gradient(90deg, rgba(255,245,220,0.98) 0%, rgba(255,255,255,0.9) 100%);
+      border:2px solid rgba(0,0,0,0.03);
+    }
+    .score .sep { color: #7a5a5a; font-weight:700; margin:0 6px; }
+
+    /* Subtitle row (small captions) */
+    .caption-row {display:flex;gap:12px;align-items:center;margin-bottom:10px;}
+    .chip {padding:6px 10px;border-radius:999px;font-size:12px;font-weight:700;}
+    .chip.red {background:var(--red);color:#fff;}
+    .chip.yellow {background:var(--yellow); color:#111; font-weight:800;}
+
+    /* Table styles */
+    .players-table {
+      width:100%;
+      border-collapse:collapse;
+      margin-top:6px;
+      font-size:13px;
+    }
+    .players-table thead th {
+      text-align:left;
+      padding:10px 8px;
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:1px;
+      color:var(--muted);
+      border-bottom:2px dashed rgba(0,0,0,0.06);
+    }
+    .players-table tbody td {
+      padding:10px 8px;
+      border-bottom:1px dashed rgba(0,0,0,0.04);
+      vertical-align:middle;
+    }
+    .players-table tbody tr:last-child td { border-bottom:none; }
+    .players-table .player {font-weight:700;}
+
+    /* Visual accent left bar for each card */
+    .card-accent {
+      position:relative;
+      padding-left:12px;
+    }
+    .card-accent::before {
+      content:"";
+      position:absolute;
+      left:0;top:12px;bottom:12px;
+      width:8px;
+      background: linear-gradient(180deg,var(--red),var(--yellow));
+      border-radius:6px;
+      box-shadow: 0 4px 16px rgba(196,0,0,0.08);
+    }
+
+    /* Responsive */
+    @media (max-width:880px){
+      .match-top {flex-direction:column; align-items:stretch;}
+      .score {min-width:auto; width:100%; justify-content:flex-start;}
+      .brand{width:68px;height:68px;font-size:18px;}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="global">
+      <div class="brand">ES</div>
+      <div class="page-title">
+        <h1>ESPAÑA A L’EUROBASQUET</h1>
+        <p>Resultats i estadistiques</p>
+      </div>
+    </header>
+
+    <!-- ----------------- SECTION 1 ----------------- -->
+    <!-- Documento: (original 1) — ejemplo: Georgia — España (usado contenido inicial) -->
+    <article class="card card-accent" id="doc1" aria-labelledby="doc1-title">
+      <div class="match-top">
+        <div class="match-left">
+          <div class="match-meta">
+            <div>
+              <div class="country-block" id="doc1-title">Georgia — España</div>
+              <div class="team-stats">
+                <strong>Estadísticas de equip:</strong><br>
+                Tirs de camp 29/63 · Triples 8/27 · Tirs lliures 17/26
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="score" aria-hidden="true"><span>83</span><span class="sep">—</span><span>68</span></div>
+      </div>
+
+            <table class="players-table" aria-label="Estadísticas jugadores Georgia - España">
+        <thead>
+          <tr><th>Jugador</th><th>Min</th><th>Pts</th><th>Reb</th><th>Ast</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="player">SANTI ALDAMA</td><td>24:04</td><td>12</td><td>3</td><td>2</td></tr>
+          <tr><td class="player">SERGIO DE LARREA</td><td>23:07</td><td>3</td><td>0</td><td>1</td></tr>
+          <tr><td class="player">WILLY HERNANGÓMEZ</td><td>21:09</td><td>8</td><td>5</td><td>1</td></tr>
+          <tr><td class="player">JOEL PARRA</td><td>18:54</td><td>5</td><td>2</td><td>2</td></tr>
+          <tr><td class="player">JUANCHO HERNANGÓMEZ</td><td>19:06</td><td>13</td><td>6</td><td>2</td></tr>
+          <tr><td class="player">DARÍO BRIZUELA</td><td>22:44</td><td>11</td><td>2</td><td>5</td></tr>
+          <tr><td class="player">JUANCHO HERNGÓMEZ</td><td>19:06</td><td>13</td><td>8</td><td>2</td></tr>
+          <tr><td class="player">JAIME PRADILLA</td><td>15:41</td><td>6</td><td>2</td><td>0</td></tr>
+          <tr><td class="player">XABI LÓPEZ-AROSTEGUI</td><td>14:25</td><td>3</td><td>1</td><td>1</td></tr>
+          <tr><td class="player">MARIO SAINT-SUPÉRY</td><td>12:48</td><td>4</td><td>0</td><td>2</td></tr>
+          <tr><td class="player">JOSEP PUERTO</td><td>7:38</td><td>0</td><td>1</td><td>1</td></tr>
+        </tbody>
+      </table>
+    </article>
+
+    <!-- ----------------- SECTION 2 ----------------- -->
+    <!-- Documento: (original 2) — ejemplo: España — Bosnia y Herzegovina -->
+    <article class="card card-accent" id="doc2" aria-labelledby="doc2-title">
+      <div class="match-top">
+        <div class="match-left">
+          <div class="match-meta">
+            <div>
+              <div class="country-block" id="doc2-title">España — Bosnia y Herzegovina</div>
+              <div class="team-stats">
+                <strong>Estadísticas de equip:</strong><br>
+                Tirs de camp 30/65 · Triples 15/38 · Tirs lliures 13/16
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="score"><span>91</span><span class="sep">—</span><span>47</span></div>
+      </div>
+
+    
+      <table class="players-table" aria-label="Estadísticas jugadores España - Bosnia">
+        <thead>
+          <tr><th>Jugador</th><th>Min</th><th>Pts</th><th>Reb</th><th>Ast</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="player">SERGIO DE LARREA</td><td>22:30</td><td>0</td><td>0</td><td>5</td></tr>
+          <tr><td class="player">SANTI ALDAMA</td><td>19:10</td><td>19</td><td>5</td><td>0</td></tr>
+          <tr><td class="player">JOEL PARRA</td><td>16:50</td><td>6</td><td>6</td><td>0</td></tr>
+          <tr><td class="player">SANTIAGO YUSTA</td><td>16:27</td><td>4</td><td>1</td><td>1</td></tr>
+          <tr><td class="player">JAIME PRADILLA</td><td>12:51</td><td>4</td><td>3</td><td>4</td></tr>
+          <tr><td class="player">XABI LÓPEZ-AROSTEGUI</td><td>20:00</td><td>4</td><td>2</td><td>2</td></tr>
+          <tr><td class="player">DARÍO BRIZUELA</td><td>18:05</td><td>15</td><td>3</td><td>5</td></tr>
+          <tr><td class="player">MARIO SAINT-SUPÉRY</td><td>17:30</td><td>9</td><td>1</td><td>4</td></tr>
+          <tr><td class="player">JUANCHO HERNANGÓMEZ</td><td>17:06</td><td>8</td><td>2</td><td>1</td></tr>
+          <tr><td class="player">WILLY HERNANGÓMEZ</td><td>16:55</td><td>16</td><td>4</td><td>1</td></tr>
+          <tr><td class="player">JOSEP PUERTO</td><td>12:22</td><td>3</td><td>4</td><td>1</td></tr>
+          <tr><td class="player">YANKUBA SIMA</td><td>10:14</td><td>0</td><td>2</td><td>1</td></tr>
+        </tbody>
+      </table>
+    </article>
+
+    <!-- ----------------- SECTION 3 ----------------- -->
+    <!-- Documento: (original 3) — España — Chipre -->
+    <article class="card card-accent" id="doc3" aria-labelledby="doc3-title">
+      <div class="match-top">
+        <div class="match-left">
+          <div class="match-meta">
+            <div>
+              <div class="country-block" id="doc3-title">España — Chipre</div>
+              <div class="team-stats">
+                <strong>Estadísticas de equipo:</strong><br>
+                Tirs de camp 32/65 · Triples 14/35 · Tirs lliures 13/22
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="score"><span>88</span><span class="sep">—</span><span>67</span></div>
+      </div>
+
+     
+      <table class="players-table" aria-label="Estadísticas jugadores España - Chipre">
+        <thead>
+          <tr><th>Jugador</th><th>Min</th><th>Pts</th><th>Reb</th><th>Ast</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="player">MARIO SAINT-SUPÉRY</td><td>21:16</td><td>9</td><td>4</td><td>5</td></tr>
+          <tr><td class="player">SANTI ALDAMA</td><td>21:07</td><td>8</td><td>7</td><td>2</td></tr>
+          <tr><td class="player">XABI LÓPEZ-AROSTEGUI</td><td>20:10</td><td>2</td><td>6</td><td>2</td></tr>
+          <tr><td class="player">JOEL PARRA</td><td>20:00</td><td>5</td><td>2</td><td>4</td></tr>
+          <tr><td class="player">WILLY HERNANGÓMEZ</td><td>15:25</td><td>19</td><td>8</td><td>3</td></tr>
+          <tr><td class="player">SERGIO DE LARREA</td><td>18:44</td><td>3</td><td>1</td><td>5</td></tr>
+          <tr><td class="player">JAIME PRADILLA</td><td>18:12</td><td>4</td><td>6</td><td>1</td></tr>
+          <tr><td class="player">JOSEP PUERTO</td><td>15:34</td><td>8</td><td>2</td><td>1</td></tr>
+          <tr><td class="player">SANTIAGO YUSTA</td><td>14:48</td><td>8</td><td>1</td><td>3</td></tr>
+          <tr><td class="player">DARÍO BRIZUELA</td><td>14:25</td><td>8</td><td>1</td><td>3</td></tr>
+          <tr><td class="player">YANKUBA SIMA</td><td>11:26</td><td>4</td><td>1</td><td>0</td></tr>
+          <tr><td class="player">WILLY HERNANGÓMEZ</td><td>8:53</td><td>9</td><td>4</td><td>0</td></tr>
+        </tbody>
+      </table>
+    </article>
+
+    <!-- ----------------- SECTION 4 ----------------- -->
+    <!-- Documento: (3) Italia – España 67–63 (datos extraídos del PDF que subiste) -->
+    <article class="card card-accent" id="doc4" aria-labelledby="doc4-title">
+      <div class="match-top">
+        <div class="match-left">
+          <div class="match-meta">
+            <div>
+              <div class="country-block" id="doc4-title">Italia — España</div>
+              <div class="team-stats">
+                <strong>Estadísticas de equipo:</strong><br>
+                Tirs de camp 23/66 · 20/62 — Triples 7/29 · 10/38 — Tirs lliures 14/19 · 13/22
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="score"><span>67</span><span class="sep">—</span><span>63</span></div>
+      </div>
+
+     
+      <!-- Tabla con los jugadores y MIN/PTs/REB/AST que aparecen en tu PDF -->
+      <table class="players-table" aria-label="Estadísticas jugadores Italia - España">
+        <thead>
+          <tr><th>Jugador</th><th>Min</th><th>Pts</th><th>Reb</th><th>Ast</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="player">SANTI ALDAMA</td><td>24:40</td><td>19</td><td>10</td><td>4</td></tr>
+          <tr><td class="player">SERGIO DE LARREA</td><td>24:31</td><td>15</td><td>7</td><td>1</td></tr>
+          <tr><td class="player">WILLY HERNANGÓMEZ</td><td>17:25</td><td>1</td><td>3</td><td>1</td></tr>
+          <tr><td class="player">JOEL PARRA</td><td>15:43</td><td>1</td><td>5</td><td>1</td></tr>
+          <tr><td class="player">SANTIAGO YUSTA</td><td>12:56</td><td>2</td><td>2</td><td>3</td></tr>
+          <tr><td class="player">JAIME PRADILLA</td><td>22:21</td><td>2</td><td>4</td><td>1</td></tr>
+          <tr><td class="player">DARÍO BRIZUELA</td><td>21:31</td><td>7</td><td>2</td><td>3</td></tr>
+          <tr><td class="player">JOSEP PUERTO</td><td>18:02</td><td>9</td><td>3</td><td>1</td></tr>
+          <tr><td class="player">MARIO SAINT-SUPÉRY</td><td>15:43</td><td>7</td><td>1</td><td>1</td></tr>
+          <tr><td class="player">JUANCHO HERNANGÓMEZ</td><td>15:34</td><td>0</td><td>2</td><td>3</td></tr>
+          <tr><td class="player">XABIER LÓPEZ-AROSTEGUI</td><td>11:34</td><td>0</td><td>0</td><td>1</td></tr>
+        </tbody>
+      </table>
+    </article>
+
+    <!-- ----------------- SECTION 5 ----------------- -->
+    <!-- Documento: (4) España – Grecia 86–90 (datos extraídos del PDF que subiste) -->
+    <article class="card card-accent" id="doc5" aria-labelledby="doc5-title">
+      <div class="match-top">
+        <div class="match-left">
+          <div class="match-meta">
+            <div>
+              <div class="country-block" id="doc5-title">España — Grecia</div>
+              <div class="team-stats">
+                <strong>Estadísticas de equipo:</strong><br>
+                Tirs de camp 28/63 · 33/62 — Triples 9/28 · 12/25 — Tirs lliures 21/37 · 12/19
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="score"><span>86</span><span class="sep">—</span><span>90</span></div>
+      </div>
+
+     
+      <table class="players-table" aria-label="Estadísticas jugadores España - Grecia">
+        <thead>
+          <tr><th>Jugador</th><th>Min</th><th>Pts</th><th>Reb</th><th>Ast</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="player">SANTI ALDAMA</td><td>29:16</td><td>12</td><td>8</td><td>2</td></tr>
+          <tr><td class="player">JOEL PARRA</td><td>27:30</td><td>7</td><td>3</td><td>1</td></tr>
+          <tr><td class="player">SERGIO DE LARREA</td><td>25:44</td><td>6</td><td>1</td><td>4</td></tr>
+          <tr><td class="player">JAIME PRADILLA</td><td>17:45</td><td>14</td><td>1</td><td>1</td></tr>
+          <tr><td class="player">SANTIAGO YUSTA</td><td>11:23</td><td>9</td><td>6</td><td>3</td></tr>
+          <tr><td class="player">XABIER LÓPEZ AROSTEGUI</td><td>20:50</td><td>12</td><td>1</td><td>0</td></tr>
+          <tr><td class="player">MARIO SAINT-SUPÉRY</td><td>17:22</td><td>13</td><td>1</td><td>1</td></tr>
+          <tr><td class="player">JUANCHO HERNANGÓMEZ</td><td>16:47</td><td>5</td><td>3</td><td>0</td></tr>
+          <tr><td class="player">WILLY HERNANGÓMEZ</td><td>14:55</td><td>6</td><td>0</td><td>1</td></tr>
+          <tr><td class="player">DARÍO BRIZUELA</td><td>10:26</td><td>0</td><td>1</td><td>3</td></tr>
+          <tr><td class="player">JOSEP PUERTO</td><td>5:54</td><td>2</td><td>0</td><td>0</td></tr>
+          <tr><td class="player">YANKUBA SIMA</td><td>2:08</td><td>0</td><td>1</td><td>0</td></tr>
+        </tbody>
+      </table>
+    </article>
+
+    <footer style="text-align:center;margin-top:18px;color:var(--muted);font-size:13px;">
+    Alexia Alvarez Gonzalez-Conde, treball de recerca 2024/25/26.
+    </footer>
+  </div>
+</body>
+</html>
